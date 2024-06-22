@@ -1,5 +1,5 @@
 import './App.css'
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 function App() {
     const inputQueryInitial =
@@ -10,38 +10,29 @@ function App() {
         useState(inputQueryInitial)
 
     const [inputUser, setInputUser] =
-        useState("user")
+        useState("admin' or '1'='1")
 
     const [outputQuery, setOutputQuery] =
-        useState(inputQuery)
+        useState(inputQueryInitial)
 
-    function handleInputQueryChange(targetValue: string) {
-        setInputQuery(targetValue)
-        replaceOutputWithInput(targetValue, inputUser)
-    }
-
-    function handleUsernameChange(targetValue: string) {
-        setInputUser(targetValue)
-        replaceOutputWithInput(inputQuery, targetValue)
-    }
-
-    function replaceOutputWithInput(inputQuery: string, inputName: string) {
-        setOutputQuery(
-            inputQuery
-                .replace("$name", inputName)
-        )
-    }
+    useEffect(() => {
+            setOutputQuery(
+                inputQuery
+                    .replace("$name", inputUser)
+            )
+        }, [inputQuery, inputUser]
+    )
 
     return (
         <>
-            <fieldset>
+            <fieldset className="querybox">
                 <legend>Input query</legend>
                 <textarea
                     name="inputQuery"
                     className="query"
                     value={inputQuery}
                     onChange={(e) =>
-                        handleInputQueryChange(e.target.value)}
+                        setInputQuery(e.target.value)}
                 />
             </fieldset>
 
@@ -52,7 +43,7 @@ function App() {
                         name="name"
                         value={inputUser}
                         onChange={(e) =>
-                            handleUsernameChange(e.target.value)}
+                            setInputUser(e.target.value)}
                     />
                 </label>
             </fieldset>
