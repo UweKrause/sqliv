@@ -2,14 +2,15 @@
 
 Visualizes SQL injections.
 
-When exploring a SQL injections, one thing I have seen beginners struggle and often struggle myself, is to wrap the head
-around the relation between the input and how it will affect the SQl query executed.
-Therefore, I want to help learners and myself with this tool that will visualize this.
+When tinkering with SQL injections, one thing I have seen beginners struggle and yet sometimes struggle with myself,
+is to wrap the head around the relation between the input field and how it will affect the SQL query executed.
+Therefore, I want to help learners and myself with this visualization aid.
 
-Demo instance (sometimes ahead of pushed commits!) is running at https://uwekrau.se/sqliv 
+Demo instance (sometimes ahead of pushed commits!) is running at https://uwekrau.se/sqliv
 
-Feedback/Ideas/Improvement are welcome as GitHub issues.
+Feedback/Ideas/Improvement are welcome as GitHub discussion.
 
+<!--
 # React + TypeScript + Vite
 
 ## Expanding the ESLint configuration
@@ -35,3 +36,4 @@ export default {
 - Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and
   add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+!-->
