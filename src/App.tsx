@@ -9,8 +9,9 @@ SyntaxHighlighter.registerLanguage('sql', sql);
 
 function App() {
     const inputQueryInitial =
-        "select count(*) from table users\n" +
-        "    where name='$name';"
+        "select count(*)\n" +
+        "   from table users\n" +
+        "   where name='$name';"
 
     const [inputQuery, setInputQuery] =
         useState(inputQueryInitial)
@@ -24,6 +25,8 @@ function App() {
     useEffect(() => {
             setOutputQuery(
                 inputQuery
+                    .trim()
+                    .replace(/\s+/g, ' ')
                     .replace("$name", inputUser)
             )
         }, [inputQuery, inputUser]
