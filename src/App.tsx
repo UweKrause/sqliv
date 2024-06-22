@@ -1,9 +1,17 @@
 import './App.css'
 import {useEffect, useState} from "react";
 
-import {Light as SyntaxHighlighter} from 'react-syntax-highlighter';
-import sql from 'react-syntax-highlighter/dist/esm/languages/hljs/sql';
-import solarizedDark from 'react-syntax-highlighter/dist/esm/styles/hljs/solarized-dark';
+import {Light as SyntaxHighlighter} from
+        'react-syntax-highlighter';
+
+import sql from
+        'react-syntax-highlighter/dist/esm/languages/hljs/sql';
+
+import solarizedDark from
+        'react-syntax-highlighter/dist/esm/styles/hljs/solarized-dark';
+
+import solarizedLight from
+        'react-syntax-highlighter/dist/esm/styles/hljs/solarized-light';
 
 SyntaxHighlighter.registerLanguage('sql', sql);
 
@@ -36,6 +44,23 @@ function App() {
             )
         }, [inputQuery, inputUser, inputPassword]
     )
+
+    const [syntaxHighlighterStyle,
+        setSyntaxHighlighterStyle] = useState(
+        window.matchMedia('(prefers-color-scheme: dark)')
+            .matches
+            ? solarizedDark
+            : solarizedLight
+    )
+
+    useEffect(() => {
+        window.matchMedia('(prefers-color-scheme: dark)')
+            .addEventListener('change', event => {
+                setSyntaxHighlighterStyle(event.matches
+                    ? solarizedDark
+                    : solarizedLight);
+            });
+    }, []);
 
     return (
         <>
@@ -73,7 +98,10 @@ function App() {
 
             <fieldset className="querybox">
                 <legend>Output query</legend>
-                <SyntaxHighlighter language="sql" style={solarizedDark}>
+                <SyntaxHighlighter
+                    language="sql"
+                    style={syntaxHighlighterStyle}
+                >
                     {outputQuery}
                 </SyntaxHighlighter>
             </fieldset>
