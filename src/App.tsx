@@ -1,10 +1,16 @@
 import './App.css'
 import {useEffect, useState} from "react";
 
+import { LightAsync as SyntaxHighlighter } from 'react-syntax-highlighter';
+import sql from 'react-syntax-highlighter/dist/esm/languages/hljs/sql';
+import solarizedDark from 'react-syntax-highlighter/dist/esm/styles/hljs/solarized-dark';
+
+SyntaxHighlighter.registerLanguage('sql', sql);
+
 function App() {
     const inputQueryInitial =
         "select count(*) from table users\n" +
-        "    where 'name'='$name';"
+        "    where name='$name';"
 
     const [inputQuery, setInputQuery] =
         useState(inputQueryInitial)
@@ -50,10 +56,9 @@ function App() {
 
             <fieldset className="querybox">
                 <legend>Output query</legend>
-                <textarea className="query"
-                          value={outputQuery}
-                          readOnly={true}
-                />
+                <SyntaxHighlighter language="sql" style={solarizedDark}>
+                    {outputQuery}
+                </SyntaxHighlighter>
             </fieldset>
         </>
     )
