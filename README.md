@@ -6,6 +6,8 @@ When exploring a SQL injections, one thing I have seen beginners struggle and of
 around the relation between the input and how it will affect the SQl query executed.
 Therefore, I want to help learners and myself with this tool that will visualize this.
 
+Demo instance (sometimes ahead of pushed commits!) is running at https://uwekrau.se/sqliv 
+
 Feedback/Ideas/Improvement are welcome as GitHub issues.
 
 # React + TypeScript + Vite
