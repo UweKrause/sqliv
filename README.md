@@ -1,4 +1,6 @@
-# SQLiExplain
+# SQLiV
+
+Visualizes SQL injections.
 
 When exploring a SQL injections, one thing I have seen beginners struggle and often struggle myself, is to wrap the head
 around the relation between the input and how it will affect the SQl query executed.
