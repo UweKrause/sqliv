@@ -1,7 +1,7 @@
 import './App.css'
 import {useEffect, useState} from "react";
 
-import { LightAsync as SyntaxHighlighter } from 'react-syntax-highlighter';
+import {Light as SyntaxHighlighter} from 'react-syntax-highlighter';
 import sql from 'react-syntax-highlighter/dist/esm/languages/hljs/sql';
 import solarizedDark from 'react-syntax-highlighter/dist/esm/styles/hljs/solarized-dark';
 
