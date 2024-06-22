@@ -40,3 +40,13 @@
 .read-the-docs {
   color: #888;
 }
+
+.querybox {
+  width: 90%;
+}
+
+.query {
+  display: block;
+  width: 98%;
+  height: 100px;
+}
