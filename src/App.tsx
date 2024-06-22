@@ -1,5 +1,5 @@
 import './App.css'
-import {useEffect, useState} from "react";
+import {ChangeEvent, useEffect, useState} from "react";
 
 import {Light as SyntaxHighlighter} from
         'react-syntax-highlighter';
@@ -25,24 +25,29 @@ function App() {
     const [inputQuery, setInputQuery] =
         useState(inputQueryInitial)
 
-    const [inputUser, setInputUser] =
-        useState("admin' or '1'='1")
-
-    const [inputPassword, setInputPassword] =
-        useState("trustno1")
+    const [inputFields, setInputFields] = useState(
+        [
+            {key: crypto.randomUUID(), name: "name", value: "admin' or '1'='1"},
+            {key: crypto.randomUUID(), name: "password", value: "trustno1"},
+        ]
+    )
 
     const [outputQuery, setOutputQuery] =
         useState(inputQueryInitial)
 
     useEffect(() => {
+            let outputQuery = inputQuery
+            inputFields.forEach(
+                ({name, value}) =>
+                    outputQuery = outputQuery.replace("$" + name, value)
+            )
+
             setOutputQuery(
-                inputQuery
-                    .replace("$name", inputUser)
-                    .replace("$password", inputPassword)
+                outputQuery
                     .trim()
                     .replace(/\s+/g, ' ')
             )
-        }, [inputQuery, inputUser, inputPassword]
+        }, [inputQuery, inputFields]
     )
 
     const [syntaxHighlighterStyle,
@@ -62,6 +67,12 @@ function App() {
             });
     }, []);
 
+    function handleInputFieldChange(index: number, event: ChangeEvent<HTMLInputElement>) {
+        const data = [...inputFields]
+        data[index]["value"] = event.target.value
+        setInputFields(data)
+    }
+
     return (
         <>
             <fieldset className="querybox">
@@ -77,23 +88,27 @@ function App() {
 
             <fieldset>
                 <legend>Input fields</legend>
-                <label>$name
-                    <input
-                        name="name"
-                        value={inputUser}
-                        onChange={(e) =>
-                            setInputUser(e.target.value)}
-                    />
-                </label>
-                <br></br>
-                <label>$password
-                    <input
-                        name="password"
-                        value={inputPassword}
-                        onChange={(e) =>
-                            setInputPassword(e.target.value)}
-                    />
-                </label>
+                {
+                    inputFields.map(
+                        ({key, name, value}, index) => {
+                            return (
+                                <div
+                                    key={key}>
+                                    <label>${name}
+                                        <input
+                                            name={name}
+                                            value={value}
+                                            onChange={(event) =>
+                                                handleInputFieldChange(index, event)}
+                                        />
+                                    </label>
+                                    <br></br>
+                                </div>
+                            )
+                        }
+                    )
+                }
+
             </fieldset>
 
             <fieldset className="querybox">
