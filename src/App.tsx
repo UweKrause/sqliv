@@ -46,7 +46,7 @@ function App() {
             let outputQuery = inputQuery
             inputFields.forEach(
                 ({name, value}) =>
-                    outputQuery = outputQuery.replace(name, value)
+                    outputQuery = outputQuery.replaceAll(name, value)
             )
 
             setOutputQuery(
