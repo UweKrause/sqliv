@@ -80,6 +80,14 @@ function App() {
         setInputFields(data)
     }
 
+    function handleInputFieldRemove(key: string) {
+        console.log(key)
+        setInputFields(inputFields.filter(
+            (inputField) =>
+                inputField.key != key)
+        )
+    }
+
     return (
         <>
             <fieldset className="querybox">
@@ -144,6 +152,9 @@ function App() {
                                                 handleInputFieldChange(index, event)}
                                         />
                                     </label>
+                                    <span onClick={() => handleInputFieldRemove(key)}>
+                                        🗑
+                                    </span>
                                     <br></br>
                                 </div>
                             )
