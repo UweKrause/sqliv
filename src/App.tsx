@@ -16,31 +16,38 @@ import solarizedLight from
 SyntaxHighlighter.registerLanguage('sql', sql);
 
 function App() {
-    const inputQueryInitial =
-        "select count(*)\n" +
-        "    from table users\n" +
-        "    where name='$name'\n" +
-        "    and password='$password';"
+    const exampleInputs = [
+        {
+            inputQuery: "select count(*)\n" +
+                "    from table users\n" +
+                "    where name='$name'\n" +
+                "    and password='$password';",
+            inputFields: [
+                {key: crypto.randomUUID(), name: "$name", value: "admin' or '1'='1"},
+                {key: crypto.randomUUID(), name: "$password", value: "trustno1"},
+            ]
+        },
+    ]
 
-    const [inputQuery, setInputQuery] =
-        useState(inputQueryInitial)
+    const initialInputQuery = exampleInputs[0].inputQuery
+    const initialInputFields = exampleInputs[0].inputFields
 
     const defaultNameNewInputField = "$";
+
+    const [inputQuery, setInputQuery] =
+        useState(initialInputQuery)
 
     const [newInputFieldName, setNewInputFieldName] =
         useState(defaultNameNewInputField)
 
-    const [newInputFieldStatus, setNewInputFieldStatus] = useState("$variable will be replaced")
+    const [newInputFieldStatus, setNewInputFieldStatus] =
+        useState("$variable will be replaced")
 
-    const [inputFields, setInputFields] = useState(
-        [
-            {key: crypto.randomUUID(), name: "$name", value: "admin' or '1'='1"},
-            {key: crypto.randomUUID(), name: "$password", value: "trustno1"},
-        ]
-    )
+    const [inputFields, setInputFields] =
+        useState(initialInputFields)
 
     const [outputQuery, setOutputQuery] =
-        useState(inputQueryInitial)
+        useState(initialInputQuery)
 
     useEffect(() => {
             let outputQuery = inputQuery
