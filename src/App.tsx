@@ -25,10 +25,17 @@ function App() {
     const [inputQuery, setInputQuery] =
         useState(inputQueryInitial)
 
+    const defaultNameNewInputField = "$";
+
+    const [newInputFieldName, setNewInputFieldName] =
+        useState(defaultNameNewInputField)
+
+    const [newInputFieldStatus, setNewInputFieldStatus] = useState("$variable will be replaced")
+
     const [inputFields, setInputFields] = useState(
         [
-            {key: crypto.randomUUID(), name: "name", value: "admin' or '1'='1"},
-            {key: crypto.randomUUID(), name: "password", value: "trustno1"},
+            {key: crypto.randomUUID(), name: "$name", value: "admin' or '1'='1"},
+            {key: crypto.randomUUID(), name: "$password", value: "trustno1"},
         ]
     )
 
@@ -39,7 +46,7 @@ function App() {
             let outputQuery = inputQuery
             inputFields.forEach(
                 ({name, value}) =>
-                    outputQuery = outputQuery.replace("$" + name, value)
+                    outputQuery = outputQuery.replace(name, value)
             )
 
             setOutputQuery(
@@ -76,7 +83,7 @@ function App() {
     return (
         <>
             <fieldset className="querybox">
-                <legend>Input query</legend>
+                <legend>Input Query</legend>
                 <textarea
                     name="inputQuery"
                     className="query"
@@ -87,14 +94,49 @@ function App() {
             </fieldset>
 
             <fieldset>
-                <legend>Input fields</legend>
+                <legend>Input Options</legend>
+                <form>
+                    <input
+                        id="newInputName"
+                        value={newInputFieldName}
+                        onChange={(e) => {
+                            setNewInputFieldName(e.target.value)
+                        }}
+                    />
+                    <button
+                        onClick={(e) => {
+                            e.preventDefault()
+                            if (!inputFields.some((inputField) => {
+                                return inputField.name === newInputFieldName
+                            })) {
+                                setInputFields([
+                                        ...inputFields,
+                                        {key: crypto.randomUUID(), name: newInputFieldName, value: ""}
+                                    ]
+                                )
+                                setNewInputFieldStatus("Added field " + newInputFieldName)
+                                setNewInputFieldName(defaultNameNewInputField)
+                            } else {
+                                setNewInputFieldStatus("Field " + newInputFieldName + " already exists")
+                            }
+                        }
+                        }
+                    >
+                        Add
+                    </button>
+                    <span>{newInputFieldStatus}</span>
+                </form>
+            </fieldset>
+
+            <fieldset>
+                <legend>Input Fields</legend>
                 {
                     inputFields.map(
                         ({key, name, value}, index) => {
                             return (
                                 <div
                                     key={key}>
-                                    <label>${name}
+                                    <label>{name}
                                         <input
                                             name={name}
                                             value={value}
@@ -108,11 +150,10 @@ function App() {
                         }
                     )
                 }
-
             </fieldset>
 
             <fieldset className="querybox">
-                <legend>Output query</legend>
+                <legend>Output Query</legend>
                 <SyntaxHighlighter
                     language="sql"
                     style={syntaxHighlighterStyle}
