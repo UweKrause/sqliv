@@ -18,15 +18,27 @@ SyntaxHighlighter.registerLanguage('sql', sql);
 function App() {
     const exampleInputs = [
         {
+            name: "Login by select count(*)",
             inputQuery: "select count(*)\n" +
                 "    from table users\n" +
                 "    where name='$name'\n" +
                 "    and password='$password';",
             inputFields: [
-                {key: crypto.randomUUID(), name: "$name", value: "admin' or '1'='1"},
+                {key: crypto.randomUUID(), name: "$name", value: "admin"},
                 {key: crypto.randomUUID(), name: "$password", value: "trustno1"},
             ]
         },
+        {
+            name: "Login by select count(*) (sqli via line comment)",
+            inputQuery: "select count(*)\n" +
+                "    from table users\n" +
+                "    where name='$name'\n" +
+                "    and password='$password';",
+            inputFields: [
+                {key: crypto.randomUUID(), name: "$name", value: "admin' --"},
+                {key: crypto.randomUUID(), name: "$password", value: "trustno1"},
+            ]
+        }
     ]
 
     const initialInputQuery = exampleInputs[0].inputQuery
@@ -97,6 +109,23 @@ function App() {
 
     return (
         <>
+            <fieldset>
+                <legend>Load Example</legend>
+                <form>
+                    <select
+                        onChange={(e) => {
+                            setInputQuery(exampleInputs[~~e.target.value].inputQuery)
+                            setInputFields(exampleInputs[~~e.target.value].inputFields)
+                        }}
+                    >
+                        {
+                            exampleInputs.map((eI, index) => {
+                                return <option value={index}>{eI.name}</option>;
+                            })
+                        }
+                    </select>
+                </form>
+            </fieldset>
             <fieldset className="querybox">
                 <legend>Input Query</legend>
                 <textarea
