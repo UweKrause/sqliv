@@ -43,7 +43,7 @@ function App() {
             name: "Search movie via name",
             inputQuery: "select id, title, genre, cover, rating\n" +
                 "    from table movies\n" +
-                "    where title like '%$title%'",
+                "    where title like '%$title%';",
             inputFields: [
                 {key: crypto.randomUUID(), name: "$title", value: "the"},
             ]
@@ -52,7 +52,7 @@ function App() {
             name: "Search movie via name (sqli via UNION)",
             inputQuery: "select id, title, genre, cover, rating\n" +
                 "    from table movies\n" +
-                "    where title like '%$title%'",
+                "    where title like '%$title%';",
             inputFields: [
                 {
                     key: crypto.randomUUID(),
@@ -65,8 +65,8 @@ function App() {
             name: "Filter movie via genre and/or rating",
             inputQuery: "select id, title, genre, cover, rating\n" +
                 "    from table movies\n" +
-                "    where genre like '%$genre%'" +
-                "    and rating=$rating",
+                "    where genre like '%$genre%'\n" +
+                "    and rating=$rating;",
             inputFields: [
                 {key: crypto.randomUUID(), name: "$genre", value: "Comedy"},
                 {key: crypto.randomUUID(), name: "$rating", value: "1"},
