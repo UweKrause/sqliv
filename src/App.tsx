@@ -111,6 +111,7 @@ function App() {
                             setNewInputFieldName(e.target.value)
                         }}
                     />
+                    &nbsp;
                     <button
                         onClick={(e) => {
                             e.preventDefault()
@@ -132,6 +133,7 @@ function App() {
                     >
                         Add
                     </button>
+                    &nbsp;
                     <span>{newInputFieldStatus}</span>
                 </form>
             </fieldset>
@@ -144,7 +146,9 @@ function App() {
                             return (
                                 <div
                                     key={key}>
-                                    <label>{name}
+                                    <label>
+                                        {name}
+                                        &nbsp;
                                         <input
                                             name={name}
                                             value={value}
@@ -152,6 +156,7 @@ function App() {
                                                 handleInputFieldChange(index, event)}
                                         />
                                     </label>
+                                    &nbsp;
                                     <span onClick={() => handleInputFieldRemove(key)}>
                                         🗑
                                     </span>
