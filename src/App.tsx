@@ -38,7 +38,40 @@ function App() {
                 {key: crypto.randomUUID(), name: "$name", value: "admin' --"},
                 {key: crypto.randomUUID(), name: "$password", value: "trustno1"},
             ]
-        }
+        },
+        {
+            name: "Search movie via name",
+            inputQuery: "select id, title, genre, cover, rating\n" +
+                "    from table movies\n" +
+                "    where title like '%$title%'",
+            inputFields: [
+                {key: crypto.randomUUID(), name: "$title", value: "the"},
+            ]
+        },
+        {
+            name: "Search movie via name (sqli via UNION)",
+            inputQuery: "select id, title, genre, cover, rating\n" +
+                "    from table movies\n" +
+                "    where title like '%$title%'",
+            inputFields: [
+                {
+                    key: crypto.randomUUID(),
+                    name: "$title",
+                    value: "xxxxxx%' union select *,NULL,NULL from users --"
+                },
+            ]
+        },
+        {
+            name: "Filter movie via genre and/or rating",
+            inputQuery: "select id, title, genre, cover, rating\n" +
+                "    from table movies\n" +
+                "    where genre like '%$genre%'" +
+                "    and rating=$rating",
+            inputFields: [
+                {key: crypto.randomUUID(), name: "$genre", value: "Comedy"},
+                {key: crypto.randomUUID(), name: "$rating", value: "1"},
+            ]
+        },
     ]
 
     const initialInputQuery = exampleInputs[0].inputQuery
