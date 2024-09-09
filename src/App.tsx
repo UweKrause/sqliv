@@ -82,6 +82,9 @@ function App() {
     const [inputQuery, setInputQuery] =
         useState(initialInputQuery)
 
+    const [newInputVieldFormVisible, setnewInputVieldFormVisible] =
+        useState(false)
+
     const [newInputFieldName, setNewInputFieldName] =
         useState(defaultNameNewInputField)
 
@@ -171,8 +174,14 @@ function App() {
             </fieldset>
 
             <fieldset>
-                <legend>Input Options</legend>
-                <form>
+                <legend
+                    onClick={
+                        () => setnewInputVieldFormVisible(!newInputVieldFormVisible)
+                    }
+                >
+                    Input Options
+                </legend>
+                <form className={newInputVieldFormVisible ? '' : 'hidden'}>
                     <input
                         id="newInputName"
                         value={newInputFieldName}
