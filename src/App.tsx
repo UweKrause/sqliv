@@ -28,17 +28,17 @@ function App() {
                 {key: crypto.randomUUID(), name: "$password", value: "trustno1"},
             ]
         },
-        {
-            name: "Login by select count(*) (sqli via line comment)",
-            inputQuery: "select count(*)\n" +
-                "    from table users\n" +
-                "    where name='$name'\n" +
-                "    and password='$password';",
-            inputFields: [
-                {key: crypto.randomUUID(), name: "$name", value: "admin' --"},
-                {key: crypto.randomUUID(), name: "$password", value: "trustno1"},
-            ]
-        },
+        // {
+        //     name: "Login by select count(*) (sqli via line comment)",
+        //     inputQuery: "select count(*)\n" +
+        //         "    from table users\n" +
+        //         "    where name='$name'\n" +
+        //         "    and password='$password';",
+        //     inputFields: [
+        //         {key: crypto.randomUUID(), name: "$name", value: "admin' --"},
+        //         {key: crypto.randomUUID(), name: "$password", value: "trustno1"},
+        //     ]
+        // },
         {
             name: "Search movie via name",
             inputQuery: "select id, title, genre, cover, rating\n" +
@@ -48,19 +48,19 @@ function App() {
                 {key: crypto.randomUUID(), name: "$title", value: "the"},
             ]
         },
-        {
-            name: "Search movie via name (sqli via UNION)",
-            inputQuery: "select id, title, genre, cover, rating\n" +
-                "    from table movies\n" +
-                "    where title like '%$title%';",
-            inputFields: [
-                {
-                    key: crypto.randomUUID(),
-                    name: "$title",
-                    value: "xxxxxx%' union select *,NULL,NULL from users --"
-                },
-            ]
-        },
+        // {
+        //     name: "Search movie via name (sqli via UNION)",
+        //     inputQuery: "select id, title, genre, cover, rating\n" +
+        //         "    from table movies\n" +
+        //         "    where title like '%$title%';",
+        //     inputFields: [
+        //         {
+        //             key: crypto.randomUUID(),
+        //             name: "$title",
+        //             value: "xxxxxx%' union select *,NULL,NULL from users --"
+        //         },
+        //     ]
+        // },
         {
             name: "Filter movie via genre and/or rating",
             inputQuery: "select id, title, genre, cover, rating\n" +
