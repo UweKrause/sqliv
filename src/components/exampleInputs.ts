@@ -58,15 +58,15 @@ export const exampleInputs = [
         name: "Juice Shop Login",
         inputQuery: "SELECT * FROM Users WHERE email = '$email' AND password = '$password' AND deletedAt IS NULL",
         inputFields: [
-            {key: crypto.randomUUID, name: "$email", value: "admin@juice-sh.op"},
-            {key: crypto.randomUUID, name: "$password", value: "SuperJuicer (maybe?)"}
+            {key: crypto.randomUUID(), name: "$email", value: "admin@juice-sh.op"},
+            {key: crypto.randomUUID(), name: "$password", value: "SuperJuicer (maybe?)"}
         ]
     },
     {
         name: "Juice Shop Search",
         inputQuery: "SELECT * FROM Products WHERE ((name LIKE '%$q%' OR description LIKE '%$q%') AND deletedAt IS NULL) ORDER BY name",
         inputFields: [
-            {key: crypto.randomUUID, name: "$q", value: "Juice"}
+            {key: crypto.randomUUID(), name: "$q", value: "Juice"}
         ]
     },
 ]
