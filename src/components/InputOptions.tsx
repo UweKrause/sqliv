@@ -1,8 +1,17 @@
-import {useState} from "react";
+import React, {useState} from "react";
+
+import {InputField} from "./exampleInputs.ts";
+
+type InputOptions = {
+    inputFields: InputField[],
+    setInputFields: React.Dispatch<React.SetStateAction<InputField[]>>
+}
 
 const defaultNameNewInputField = "$";
 
-export default function InputOptions({inputFields, setInputFields}) {
+export default function InputOptions(
+    {inputFields, setInputFields}: InputOptions) {
+
     const [newInputVieldFormVisible, setnewInputVieldFormVisible] =
         useState(false)
 

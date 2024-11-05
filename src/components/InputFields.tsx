@@ -1,6 +1,14 @@
-import {ChangeEvent} from "react";
+import React, {ChangeEvent} from "react";
 
-export default function InputFields({inputFields, setInputFields}) {
+import {InputField} from "./exampleInputs.ts";
+
+type InputFields = {
+    inputFields: InputField[],
+    setInputFields: React.Dispatch<React.SetStateAction<InputField[]>>
+}
+
+export default function InputFields(
+    {inputFields, setInputFields}: InputFields) {
 
     function handleInputFieldChange(index: number, event: ChangeEvent<HTMLInputElement>) {
         const data = [...inputFields]

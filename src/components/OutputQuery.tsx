@@ -5,9 +5,16 @@ import sql from 'react-syntax-highlighter/dist/esm/languages/hljs/sql';
 import solarizedDark from 'react-syntax-highlighter/dist/esm/styles/hljs/solarized-dark';
 import solarizedLight from 'react-syntax-highlighter/dist/esm/styles/hljs/solarized-light';
 
+import {InputField} from "./exampleInputs.ts";
+
+type OutputQuery = {
+    inputQuery: string;
+    inputFields: InputField[]
+}
+
 SyntaxHighlighter.registerLanguage('sql', sql);
 
-export default function OutputQuery({inputQuery, inputFields}) {
+export default function OutputQuery({inputQuery, inputFields}: OutputQuery) {
 
     const [syntaxHighlighterStyle,
         setSyntaxHighlighterStyle] = useState(

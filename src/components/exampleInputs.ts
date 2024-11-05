@@ -1,4 +1,17 @@
-export const exampleInputs = [
+export type ExampleInput = {
+    name: string;
+    inputQuery: string;
+    inputFields: InputField[]
+}
+
+export type InputField = {
+    key: `${string}-${string}-${string}-${string}-${string}`;
+    name: string;
+    value: string
+}
+
+
+export const exampleInputs: ExampleInput[] = [
     {
         name: "Login by select count(*)",
         inputQuery: "select count(*)\n" +

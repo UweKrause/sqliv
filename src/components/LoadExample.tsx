@@ -1,6 +1,15 @@
-import {exampleInputs} from "./exampleInputs.ts";
+import React from "react";
 
-export default function LoadExample({setInputQuery, setInputFields}) {
+import {exampleInputs, InputField} from "./exampleInputs.ts";
+
+
+type LoadExample = {
+    setInputQuery: React.Dispatch<React.SetStateAction<string>>,
+    setInputFields: React.Dispatch<React.SetStateAction<InputField[]>>
+}
+
+export default function LoadExample(
+    {setInputQuery, setInputFields}: LoadExample) {
 
     return (
         <fieldset>
