@@ -1,12 +1,12 @@
 # SQLiV
 
-Visualizes SQL injections.
+SQL injection Visualization - Visualizes SQL injections.
 
 When tinkering with SQL injections, one thing I have seen beginners struggle and yet sometimes struggle with myself,
 is to wrap the head around the relation between the input field and how it will affect the SQL query executed.
 Therefore, I want to help learners and myself with this visualization aid.
 
-Demo instance (sometimes ahead of pushed commits!) is running at https://uwekrau.se/sqliv
+Demo instance is running at https://sqliv.uwekrau.se/
 
 Feedback/Ideas/Improvement are welcome as GitHub discussion.
 
